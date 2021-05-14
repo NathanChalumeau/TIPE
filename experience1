@@ -1,0 +1,12 @@
+const int pont = A0; //numéro de la broche
+int valu =0;
+void setup()
+{
+  pinMode(pont, INPUT);}
+
+void loop()
+{
+  valu = analogRead(pont);
+  Serial.println(valu);
+  delay(3000);
+}
