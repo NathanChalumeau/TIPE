@@ -1,0 +1,46 @@
+const int pont1 = A0; //numéro de la broche
+const int pont2 = A1;
+const int led1 = 2;  // en cas de probleme sur un capteur
+const int led2 = 3;  // si poids>pmax
+int umax = 800;
+int valu1 = 0;      // tension du pont 1
+int valu2 = 0;      // tension du pont 2
+int taux=0.05;       // ecart accepté
+void setup()       
+{
+  pinMode(pont1, INPUT);
+  pinMode(pont2, INPUT);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+}
+
+void loop()
+{
+  valu1 = analogRead(pont1);     //mise a jour de la tension
+  valu2 = analogRead(pont2);
+  if(valu1==0) {          
+    digitalWrite(led1,HIGH);
+  }
+  else{
+    if((valu1-valu2)/max(valu1,valu2))>taux){   //verification que l'ecart soit inferieur au taux
+      digitalWrite(led1,HIGH); }
+    else{
+      digitalWrite(led1,LOW);
+      if((valu1+valu2)/2>umax){               // verification que la masse ne soit pas trop élevé
+        digitalWrite(led2,HIGH); }
+      else{digitalWrite(led2,LOW);
+    }
+  }
+}
+Serial.print(valu1);                           //impression des valeurs de tension et de l'état des led
+Serial.print(",");
+Serial.print(valu2);
+Serial.print(",");
+Serial.print(digitalRead(led1)); 
+Serial.print(",");
+Serial.print(digitalRead(led2));  
+Serial.print("\n");
+delay(2000);
+}
