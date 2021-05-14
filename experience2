@@ -1,0 +1,25 @@
+const int pont = A0; //numéro de la broche
+const int led = 2;
+int umax = 800;
+int valu = 0;
+
+void setup()
+{
+  pinMode(pont, INPUT);
+  pinMode(led,OUTPUT);
+  digitalWrite(led, LOW);
+}
+
+void loop()
+{
+  valu = analogRead(pont);
+  if(valu>umax) {
+  digitalWrite(led,HIGH);}
+  else {
+  digitalWrite(led, LOW);}
+  Serial.print(valu);
+  Serial.print(",");
+  Serial.print(digitalRead(led));
+  Serial.print("\n");
+  delay(2500);
+}
